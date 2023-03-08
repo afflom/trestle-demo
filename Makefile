@@ -2,6 +2,8 @@ CMD := "$(shell command -pv podman || command -pv docker)"
 SHELL := /bin/bash
 CWD := $(shell cd -P -- '$(shell dirname -- "$0")' && pwd -P)
 
+include Makefile-fedramp
+
 demo-build:
 	${CMD} build -t localhost:5000/trestle-demo:latest -f Containerfile .
 .PHONY: demo-build
@@ -65,16 +67,16 @@ sanity-ssps: assemble-ssps
 regenerate: regenerate-catalogs regenerate-profiles regenerate-cd
 .PHONY: regenerate
 
+assemble: assemble-catalogs assemble-profiles assemble-cd assemble-ssps
+.PHONY: assemble
+
 sanity: sanity-catalogs sanity-profiles sanity-cd sanity-ssps
 .PHONY: sanity
 
-import-nist:
-	source ./automation/lib/import.sh && import_nist_profiles
-.PHONY: import-nist
+exportcd:
+	source ./automation/lib/export-cd.sh && export-cd
+.PHONY: exportcd
 
-import-fedramp:
-	source ./automation/lib/import.sh && import_fedramp_profiles
-.PHONY: import-fedramp
 
 
 
