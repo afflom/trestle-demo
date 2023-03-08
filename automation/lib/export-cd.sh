@@ -7,5 +7,5 @@ export CDDIR="component-definitions/hello-world-$VERSION"
 
 function export-cd () {
       mkdir -p $CDDIR
-      envsubst < hello-world.json > $CDDIR/component-definition.json
+      envsubst < hello-world/hello-world-cd.json > $CDDIR/component-definition.json
 }
