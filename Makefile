@@ -74,8 +74,8 @@ sanity: sanity-catalogs sanity-profiles sanity-cd sanity-ssps
 .PHONY: sanity
 
 exportcd:
-	source ./automation/lib/export-cd.sh && install_trestle
-.PHONY: trestle-install
+	source ./automation/lib/export-cd.sh && export-cd
+.PHONY: exportcd
 
 
 
